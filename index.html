@@ -157,61 +157,214 @@
       animation: float-slow 25s ease-in-out infinite reverse;
     }
 
-    /* 3D Floating Elements */
+    /* Premium Floating Elements */
     .float-element {
       position: absolute;
       pointer-events: none;
       z-index: 1;
     }
 
-    .float-coin {
-      width: 60px;
-      height: 60px;
+    /* Glass Orb - Premium translucent sphere */
+    .float-orb {
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      background: var(--gradient-emerald);
+      background: radial-gradient(circle at 30% 30%,
+        rgba(16, 185, 129, 0.15) 0%,
+        rgba(16, 185, 129, 0.05) 40%,
+        rgba(6, 78, 59, 0.1) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.15);
       box-shadow:
-        0 10px 40px rgba(16, 185, 129, 0.3),
-        inset 0 -4px 8px rgba(0,0,0,0.3),
-        inset 0 4px 8px rgba(255,255,255,0.2);
-      animation: float-coin 6s ease-in-out infinite;
+        0 8px 32px rgba(16, 185, 129, 0.1),
+        inset 0 0 30px rgba(16, 185, 129, 0.05);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      animation: float-gentle 12s ease-in-out infinite;
     }
 
-    .float-ring {
-      width: 100px;
-      height: 100px;
-      border: 3px solid rgba(16, 185, 129, 0.3);
+    .float-orb::before {
+      content: '';
+      position: absolute;
+      top: 15%;
+      left: 20%;
+      width: 30%;
+      height: 20%;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.2) 0%, transparent 70%);
       border-radius: 50%;
-      animation: rotate-slow 15s linear infinite;
     }
 
-    .float-cube {
+    /* Gradient Ring - Elegant rotating ring */
+    .float-ring {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid transparent;
+      position: relative;
+      animation: rotate-elegant 30s linear infinite;
+    }
+
+    .float-ring::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      padding: 1px;
+      background: linear-gradient(135deg,
+        rgba(16, 185, 129, 0.4) 0%,
+        rgba(16, 185, 129, 0.05) 25%,
+        rgba(139, 92, 246, 0.2) 50%,
+        rgba(139, 92, 246, 0.05) 75%,
+        rgba(16, 185, 129, 0.3) 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+
+    /* Hexagon - Modern geometric shape */
+    .float-hex {
+      width: 50px;
+      height: 57px;
+      background: linear-gradient(180deg,
+        rgba(16, 185, 129, 0.12) 0%,
+        rgba(6, 182, 212, 0.08) 100%);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      animation: float-hex 15s ease-in-out infinite;
+      opacity: 0.6;
+    }
+
+    .float-hex::before {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      background: linear-gradient(180deg,
+        rgba(10, 15, 13, 0.8) 0%,
+        rgba(10, 15, 13, 0.6) 100%);
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    /* Premium Diamond */
+    .float-diamond {
       width: 40px;
       height: 40px;
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      border-radius: 8px;
+      background: linear-gradient(135deg,
+        rgba(16, 185, 129, 0.2) 0%,
+        rgba(52, 211, 153, 0.1) 50%,
+        rgba(6, 182, 212, 0.15) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.2);
       transform: rotate(45deg);
-      animation: float-cube 8s ease-in-out infinite;
+      animation: float-diamond 10s ease-in-out infinite;
+      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
+    }
+
+    /* Dot Grid Pattern */
+    .float-dots {
+      width: 100px;
+      height: 100px;
+      background-image: radial-gradient(rgba(16, 185, 129, 0.3) 1px, transparent 1px);
+      background-size: 12px 12px;
+      opacity: 0.4;
+      animation: float-fade 8s ease-in-out infinite;
+    }
+
+    /* Glowing Line */
+    .float-line {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(16, 185, 129, 0.5) 50%,
+        transparent 100%);
+      animation: float-line 6s ease-in-out infinite;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Particle - Subtle floating dot */
+    .float-particle {
+      border-radius: 50%;
+      background: radial-gradient(circle,
+        rgba(16, 185, 129, 0.6) 0%,
+        rgba(16, 185, 129, 0.2) 50%,
+        transparent 70%);
+      box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+    }
+
+    @keyframes float-gentle {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.6;
+      }
+      25% {
+        transform: translate(10px, -15px) scale(1.02);
+      }
+      50% {
+        transform: translate(5px, -25px) scale(1);
+        opacity: 0.8;
+      }
+      75% {
+        transform: translate(-5px, -10px) scale(0.98);
+      }
+    }
+
+    @keyframes rotate-elegant {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes float-hex {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translateY(-20px) rotate(5deg);
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes float-diamond {
+      0%, 100% {
+        transform: rotate(45deg) translateY(0) scale(1);
+        opacity: 0.6;
+      }
+      50% {
+        transform: rotate(45deg) translateY(-15px) scale(1.05);
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes float-fade {
+      0%, 100% {
+        transform: translate(0, 0);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translate(10px, -10px);
+        opacity: 0.5;
+      }
+    }
+
+    @keyframes float-line {
+      0%, 100% {
+        transform: translateX(0) scaleX(1);
+        opacity: 0.4;
+      }
+      50% {
+        transform: translateX(20px) scaleX(1.2);
+        opacity: 0.7;
+      }
     }
 
     @keyframes float-slow {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(30px, -30px); }
-    }
-
-    @keyframes float-coin {
-      0%, 100% { transform: translateY(0) rotateY(0deg); }
-      50% { transform: translateY(-20px) rotateY(180deg); }
-    }
-
-    @keyframes float-cube {
-      0%, 100% { transform: rotate(45deg) translateY(0); }
-      50% { transform: rotate(45deg) translateY(-15px); }
-    }
-
-    @keyframes rotate-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+      0%, 100% {
+        transform: translate(0, 0);
+        opacity: 0.4;
+      }
+      50% {
+        transform: translate(15px, -20px);
+        opacity: 0.7;
+      }
     }
 
     @keyframes pulse-glow {
@@ -521,6 +674,30 @@
       animation: pulse-glow 2s ease-in-out infinite;
     }
 
+    /* Toggle Switch */
+    .toggle-switch {
+      width: 48px;
+      height: 28px;
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      flex-shrink: 0;
+      border: none;
+    }
+
+    .toggle-knob {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: white;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
     /* Nav Item */
     .tm-nav-item {
       position: relative;
@@ -719,6 +896,8 @@
     .transition-colors { transition-property: color, background-color, border-color; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
     .transition-transform { transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
     .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+    .duration-300 { transition-duration: 300ms; }
+    .rotate-180 { transform: rotate(180deg); }
     .hover\:bg-emerald-900\/10:hover { background-color: rgba(6, 78, 59, 0.1); }
     .hover\:bg-emerald-900\/30:hover { background-color: rgba(6, 78, 59, 0.3); }
     .hover\:text-emerald-400:hover { color: #34D399; }
@@ -761,9 +940,42 @@
 
     // Asset data with semantic colors
     const assets = [
-      { symbol: 'SUSD', name: 'Stable USD', balance: 24850.00, color: '#10B981', icon: 'CircleDollarSign', badgeType: 'receive' },
-      { symbol: 'SET', name: 'Energy Token', balance: 12500.00, color: '#8B5CF6', icon: 'Zap', badgeType: 'exchange' },
-      { symbol: 'SAUD', name: 'Stable AUD', balance: 5000.00, color: '#F59E0B', icon: 'Landmark', badgeType: 'security' },
+      {
+        symbol: 'SUSD',
+        name: 'Stable USD',
+        balance: 24850.00,
+        color: '#10B981',
+        icon: 'CircleDollarSign',
+        badgeType: 'receive',
+        price: 1.00,
+        change24h: 0.01,
+        priceHistory: [1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00, 1.00],
+        stats: { high24h: 1.001, low24h: 0.999, volume: '45.2M', marketCap: '2.1B' }
+      },
+      {
+        symbol: 'SET',
+        name: 'Energy Token',
+        balance: 12500.00,
+        color: '#8B5CF6',
+        icon: 'Zap',
+        badgeType: 'exchange',
+        price: 2.45,
+        change24h: 5.67,
+        priceHistory: [2.10, 2.15, 2.12, 2.18, 2.25, 2.22, 2.28, 2.35, 2.30, 2.38, 2.42, 2.40, 2.35, 2.38, 2.45, 2.42, 2.48, 2.52, 2.48, 2.45, 2.50, 2.48, 2.45, 2.45],
+        stats: { high24h: 2.55, low24h: 2.08, volume: '12.8M', marketCap: '890M' }
+      },
+      {
+        symbol: 'SAUD',
+        name: 'Stable AUD',
+        balance: 5000.00,
+        color: '#F59E0B',
+        icon: 'Landmark',
+        badgeType: 'security',
+        price: 0.65,
+        change24h: -0.15,
+        priceHistory: [0.66, 0.66, 0.65, 0.66, 0.65, 0.65, 0.66, 0.65, 0.65, 0.65, 0.66, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65, 0.65],
+        stats: { high24h: 0.662, low24h: 0.648, volume: '8.5M', marketCap: '450M' }
+      },
     ];
 
     const transactions = [
@@ -789,33 +1001,70 @@
     // 3D Floating Elements Component
     const FloatingElements = () => (
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Floating Coin 1 */}
-        <div className="float-element float-coin" style={{ top: '15%', right: '10%', animationDelay: '0s' }}>
-          <div className="w-full h-full flex items-center justify-center">
-            <Icon name="CircleDollarSign" className="w-8 h-8 text-black/30" style={{ opacity: 0.3 }} />
-          </div>
-        </div>
-        {/* Floating Coin 2 */}
-        <div className="float-element float-coin" style={{ top: '60%', right: '20%', animationDelay: '-2s', width: 40, height: 40 }}>
-          <div className="w-full h-full flex items-center justify-center">
-            <Icon name="Zap" className="w-5 h-5 text-black/30" style={{ opacity: 0.3 }} />
-          </div>
-        </div>
-        {/* Floating Ring */}
-        <div className="float-element float-ring" style={{ top: '30%', left: '5%' }} />
-        {/* Floating Cube */}
-        <div className="float-element float-cube" style={{ bottom: '20%', right: '15%', animationDelay: '-1s' }} />
-        {/* Small particles */}
-        {[...Array(8)].map((_, i) => (
+        {/* Large Glass Orb - Top right */}
+        <div
+          className="float-element float-orb"
+          style={{ top: '10%', right: '8%', animationDelay: '0s' }}
+        />
+
+        {/* Smaller Glass Orb - Middle */}
+        <div
+          className="float-element float-orb"
+          style={{ top: '55%', right: '25%', width: 50, height: 50, animationDelay: '-4s' }}
+        />
+
+        {/* Elegant Gradient Ring */}
+        <div
+          className="float-element float-ring"
+          style={{ top: '25%', left: '3%' }}
+        />
+
+        {/* Second Ring - Smaller */}
+        <div
+          className="float-element float-ring"
+          style={{ bottom: '15%', right: '5%', width: 80, height: 80, animationDelay: '-10s' }}
+        />
+
+        {/* Hexagon */}
+        <div
+          className="float-element float-hex"
+          style={{ top: '70%', left: '8%', animationDelay: '-3s' }}
+        />
+
+        {/* Diamond */}
+        <div
+          className="float-element float-diamond"
+          style={{ top: '40%', right: '12%', animationDelay: '-2s' }}
+        />
+
+        {/* Dot Grid */}
+        <div
+          className="float-element float-dots"
+          style={{ bottom: '30%', left: '15%', animationDelay: '-5s' }}
+        />
+
+        {/* Glowing Lines */}
+        <div
+          className="float-element float-line"
+          style={{ top: '20%', right: '30%', transform: 'rotate(-15deg)', animationDelay: '-1s' }}
+        />
+        <div
+          className="float-element float-line"
+          style={{ bottom: '25%', left: '25%', transform: 'rotate(20deg)', animationDelay: '-3s' }}
+        />
+
+        {/* Subtle Particles - Fewer, more refined */}
+        {[...Array(6)].map((_, i) => (
           <div
             key={i}
-            className="float-element w-2 h-2 rounded-full"
+            className="float-element float-particle"
             style={{
-              background: 'rgba(16, 185, 129, 0.4)',
-              top: `${15 + Math.random() * 70}%`,
-              left: `${10 + Math.random() * 80}%`,
-              animation: `float-slow ${8 + Math.random() * 4}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 5}s`,
+              width: `${3 + Math.random() * 4}px`,
+              height: `${3 + Math.random() * 4}px`,
+              top: `${20 + i * 12}%`,
+              left: `${15 + i * 12}%`,
+              animation: `float-slow ${10 + Math.random() * 5}s ease-in-out infinite`,
+              animationDelay: `${i * -2}s`,
             }}
           />
         ))}
@@ -839,6 +1088,114 @@
       );
     };
 
+    // Line Chart Component for Asset Performance
+    const LineChart = ({ data, color, height = 120 }) => {
+      const padding = { top: 10, right: 10, bottom: 20, left: 45 };
+      const width = 500;
+      const chartWidth = width - padding.left - padding.right;
+      const chartHeight = height - padding.top - padding.bottom;
+
+      const min = Math.min(...data) * 0.998;
+      const max = Math.max(...data) * 1.002;
+      const range = max - min || 0.01;
+
+      const points = data.map((value, index) => {
+        const x = padding.left + (index / (data.length - 1)) * chartWidth;
+        const y = padding.top + chartHeight - ((value - min) / range) * chartHeight;
+        return `${x},${y}`;
+      }).join(' ');
+
+      const areaPoints = `${padding.left},${padding.top + chartHeight} ${points} ${padding.left + chartWidth},${padding.top + chartHeight}`;
+
+      // Generate Y-axis labels
+      const yLabels = [min, min + range * 0.5, max];
+
+      // Generate X-axis labels (hours)
+      const xLabels = ['24h', '18h', '12h', '6h', 'Now'];
+
+      return (
+        <svg viewBox={`0 0 ${width} ${height}`} className="w-full" style={{ height: height }}>
+          <defs>
+            <linearGradient id={`gradient-${color.replace('#', '')}`} x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor={color} stopOpacity="0.3" />
+              <stop offset="100%" stopColor={color} stopOpacity="0" />
+            </linearGradient>
+          </defs>
+
+          {/* Grid lines */}
+          {[0, 0.25, 0.5, 0.75, 1].map((ratio, i) => (
+            <line
+              key={i}
+              x1={padding.left}
+              y1={padding.top + chartHeight * ratio}
+              x2={padding.left + chartWidth}
+              y2={padding.top + chartHeight * ratio}
+              stroke="rgba(16, 185, 129, 0.1)"
+              strokeWidth="1"
+            />
+          ))}
+
+          {/* Y-axis labels */}
+          {yLabels.map((label, i) => (
+            <text
+              key={i}
+              x={padding.left - 8}
+              y={padding.top + chartHeight - (i * chartHeight / 2) + 4}
+              fill="#047857"
+              fontSize="10"
+              textAnchor="end"
+              fontFamily="IBM Plex Mono, monospace"
+            >
+              ${label.toFixed(2)}
+            </text>
+          ))}
+
+          {/* X-axis labels */}
+          {xLabels.map((label, i) => (
+            <text
+              key={i}
+              x={padding.left + (i / (xLabels.length - 1)) * chartWidth}
+              y={height - 5}
+              fill="#047857"
+              fontSize="10"
+              textAnchor="middle"
+              fontFamily="Inter, sans-serif"
+            >
+              {label}
+            </text>
+          ))}
+
+          {/* Area fill */}
+          <polygon
+            points={areaPoints}
+            fill={`url(#gradient-${color.replace('#', '')})`}
+          />
+
+          {/* Line */}
+          <polyline
+            points={points}
+            fill="none"
+            stroke={color}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{ filter: `drop-shadow(0 0 6px ${color}60)` }}
+          />
+
+          {/* Current price dot */}
+          {data.length > 0 && (
+            <circle
+              cx={padding.left + chartWidth}
+              cy={padding.top + chartHeight - ((data[data.length - 1] - min) / range) * chartHeight}
+              r="4"
+              fill={color}
+              style={{ filter: `drop-shadow(0 0 8px ${color})` }}
+            />
+          )}
+        </svg>
+      );
+    };
+
     function TrustMachinesInspiredDemo() {
       const [activeTab, setActiveTab] = useState('dashboard');
       const [showTransferModal, setShowTransferModal] = useState(false);
@@ -857,6 +1214,8 @@
       const [swapAmount, setSwapAmount] = useState('1000');
       const [isSwapping, setIsSwapping] = useState(false);
       const [swapComplete, setSwapComplete] = useState(false);
+      const [expandedAsset, setExpandedAsset] = useState(null);
+      const [chartTimeframe, setChartTimeframe] = useState('24h');
 
       const walletAddress = '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf';
       const totalBalance = assets.reduce((sum, asset) => sum + asset.balance, 0);
@@ -1240,50 +1599,146 @@
                       <h3 className="font-display text-xl font-semibold text-emerald-200 flex items-center gap-2">
                         <Icon name="Coins" className="w-5 h-5 text-emerald-600" />
                         Your Holdings
+                        <span className="text-emerald-700 text-sm font-normal ml-2">Click to view performance</span>
                       </h3>
-                      {assets.map((asset, i) => (
-                        <div
-                          key={asset.symbol}
-                          onClick={() => setSelectedAsset(asset)}
-                          className={`tm-card p-6 cursor-pointer animate-fade-up delay-${i + 1} ${
-                            selectedAsset.symbol === asset.symbol ? 'ring-2 ring-emerald-500/50' : ''
-                          }`}
-                        >
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-4">
-                              <div className="tm-icon-box icon-lg" style={{ background: `${asset.color}20` }}>
-                                <Icon name={asset.icon} className="w-7 h-7" style={{ color: asset.color }} />
+                      {assets.map((asset, i) => {
+                        const isExpanded = expandedAsset === asset.symbol;
+                        return (
+                          <div
+                            key={asset.symbol}
+                            className={`tm-card cursor-pointer animate-fade-up delay-${i + 1} transition-all duration-300 ${
+                              isExpanded ? 'ring-2 ring-emerald-500/50' : ''
+                            }`}
+                          >
+                            {/* Main Asset Row - Always visible */}
+                            <div
+                              className="p-6"
+                              onClick={() => {
+                                setExpandedAsset(isExpanded ? null : asset.symbol);
+                                setSelectedAsset(asset);
+                              }}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-4">
+                                  <div className="tm-icon-box icon-lg" style={{ background: `${asset.color}20` }}>
+                                    <Icon name={asset.icon} className="w-7 h-7" style={{ color: asset.color }} />
+                                  </div>
+                                  <div>
+                                    <p className="font-display font-bold text-xl text-emerald-200">{asset.symbol}</p>
+                                    <p className="text-emerald-600">{asset.name}</p>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-6">
+                                  <div className="text-right">
+                                    <p className="font-display text-2xl font-bold text-emerald-200">
+                                      ${asset.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                                    </p>
+                                    <div className="flex items-center justify-end gap-2">
+                                      <span className="text-emerald-600 text-sm">
+                                        ${asset.price.toFixed(2)}
+                                      </span>
+                                      <span className={`text-sm font-medium ${asset.change24h >= 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
+                                        {asset.change24h >= 0 ? '+' : ''}{asset.change24h.toFixed(2)}%
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <Icon
+                                    name="ChevronDown"
+                                    className={`w-5 h-5 text-emerald-600 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}
+                                    style={{ transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                                  />
+                                </div>
                               </div>
-                              <div>
-                                <p className="font-display font-bold text-xl text-emerald-200">{asset.symbol}</p>
-                                <p className="text-emerald-600">{asset.name}</p>
+                              <div className="mt-4">
+                                <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--tm-surface-1)' }}>
+                                  <div
+                                    className="h-full rounded-full"
+                                    style={{
+                                      width: `${(asset.balance / totalBalance) * 100}%`,
+                                      background: `linear-gradient(90deg, ${asset.color}, ${asset.color}80)`
+                                    }}
+                                  />
+                                </div>
+                                <p className="text-xs text-emerald-700 mt-2">
+                                  {((asset.balance / totalBalance) * 100).toFixed(1)}% of portfolio
+                                </p>
                               </div>
                             </div>
-                            <div className="text-right">
-                              <p className="font-display text-2xl font-bold text-emerald-200">
-                                ${asset.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
-                              </p>
-                              <p className="text-emerald-600">
-                                {asset.balance.toLocaleString()} {asset.symbol}
-                              </p>
-                            </div>
+
+                            {/* Expanded Chart Section */}
+                            {isExpanded && (
+                              <div className="border-t border-emerald-900/30 p-6 animate-fade-up" style={{ background: 'rgba(10, 15, 13, 0.5)' }}>
+                                {/* Timeframe Selector */}
+                                <div className="flex items-center justify-between mb-4">
+                                  <h4 className="text-emerald-300 font-medium flex items-center gap-2">
+                                    <Icon name="TrendingUp" className="w-4 h-4" />
+                                    Price Performance
+                                  </h4>
+                                  <div className="flex gap-1">
+                                    {['1h', '24h', '7d', '30d'].map((tf) => (
+                                      <button
+                                        key={tf}
+                                        onClick={(e) => { e.stopPropagation(); setChartTimeframe(tf); }}
+                                        className={`px-3 py-1 rounded-lg text-xs font-medium transition-all ${
+                                          chartTimeframe === tf
+                                            ? 'text-black'
+                                            : 'text-emerald-500 hover:text-emerald-300'
+                                        }`}
+                                        style={{
+                                          background: chartTimeframe === tf ? asset.color : 'var(--tm-surface-2)'
+                                        }}
+                                      >
+                                        {tf}
+                                      </button>
+                                    ))}
+                                  </div>
+                                </div>
+
+                                {/* Chart */}
+                                <div className="rounded-xl p-4 mb-4" style={{ background: 'var(--tm-surface-1)' }}>
+                                  <LineChart data={asset.priceHistory} color={asset.color} height={140} />
+                                </div>
+
+                                {/* Stats Grid */}
+                                <div className="grid grid-cols-4 gap-3">
+                                  <div className="p-3 rounded-xl" style={{ background: 'var(--tm-surface-2)' }}>
+                                    <p className="text-emerald-700 text-xs uppercase tracking-wider mb-1">24h High</p>
+                                    <p className="font-display font-bold text-emerald-200">${asset.stats.high24h}</p>
+                                  </div>
+                                  <div className="p-3 rounded-xl" style={{ background: 'var(--tm-surface-2)' }}>
+                                    <p className="text-emerald-700 text-xs uppercase tracking-wider mb-1">24h Low</p>
+                                    <p className="font-display font-bold text-emerald-200">${asset.stats.low24h}</p>
+                                  </div>
+                                  <div className="p-3 rounded-xl" style={{ background: 'var(--tm-surface-2)' }}>
+                                    <p className="text-emerald-700 text-xs uppercase tracking-wider mb-1">Volume</p>
+                                    <p className="font-display font-bold text-emerald-200">${asset.stats.volume}</p>
+                                  </div>
+                                  <div className="p-3 rounded-xl" style={{ background: 'var(--tm-surface-2)' }}>
+                                    <p className="text-emerald-700 text-xs uppercase tracking-wider mb-1">Market Cap</p>
+                                    <p className="font-display font-bold text-emerald-200">${asset.stats.marketCap}</p>
+                                  </div>
+                                </div>
+
+                                {/* Quick Actions */}
+                                <div className="flex gap-3 mt-4">
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); setShowTransferModal(true); }}
+                                    className="tm-btn-primary flex-1 py-3"
+                                  >
+                                    <Icon name="Send" className="w-4 h-4" /> Send {asset.symbol}
+                                  </button>
+                                  <button
+                                    onClick={(e) => { e.stopPropagation(); setActiveTab('trading'); }}
+                                    className="tm-btn-secondary flex-1 py-3"
+                                  >
+                                    <Icon name="ArrowRightLeft" className="w-4 h-4" /> Swap
+                                  </button>
+                                </div>
+                              </div>
+                            )}
                           </div>
-                          <div className="mt-4">
-                            <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--tm-surface-1)' }}>
-                              <div
-                                className="h-full rounded-full"
-                                style={{
-                                  width: `${(asset.balance / totalBalance) * 100}%`,
-                                  background: `linear-gradient(90deg, ${asset.color}, ${asset.color}80)`
-                                }}
-                              />
-                            </div>
-                            <p className="text-xs text-emerald-700 mt-2">
-                              {((asset.balance / totalBalance) * 100).toFixed(1)}% of portfolio
-                            </p>
-                          </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
 
                     {/* Distribution & Actions */}
@@ -1562,10 +2017,13 @@
                             {item.toggle ? (
                               <button
                                 onClick={item.toggle}
-                                className={`w-12 h-6 rounded-full transition-all relative`}
+                                className="toggle-switch"
                                 style={{ background: item.enabled ? 'var(--gradient-emerald)' : 'var(--tm-surface-3)' }}
                               >
-                                <div className={`w-5 h-5 rounded-full bg-white shadow absolute top-0.5 transition-transform ${item.enabled ? 'translate-x-6' : 'translate-x-0.5'}`} style={{ left: '0.125rem', transform: item.enabled ? 'translateX(1.5rem)' : 'translateX(0.125rem)' }} />
+                                <div
+                                  className="toggle-knob"
+                                  style={{ transform: item.enabled ? 'translateX(20px)' : 'translateX(0)' }}
+                                />
                               </button>
                             ) : (
                               <Icon name="CheckCircle" className="w-5 h-5 text-emerald-400" />
