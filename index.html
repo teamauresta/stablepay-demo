@@ -381,6 +381,16 @@
       50% { transform: translate(10px, -10px) rotate(5deg); opacity: 0.5; }
     }
 
+    /* Lattice node animation - CSS replacement for SVG animate */
+    .lattice-node {
+      animation: lattice-node-pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes lattice-node-pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.7; }
+    }
+
     @keyframes particle-drift {
       0%, 100% { transform: translate(0, 0); }
       25% { transform: translate(var(--drift-x, 10px), var(--drift-y, -15px)); }
@@ -391,6 +401,20 @@
     @keyframes pulse-glow {
       0%, 100% { box-shadow: 0 0 20px var(--tm-emerald-glow); }
       50% { box-shadow: 0 0 40px var(--tm-emerald-glow), 0 0 60px rgba(16, 185, 129, 0.2); }
+    }
+
+    @keyframes pqc-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
+    }
+
+    .pqc-badge-glow {
+      animation: pqc-glow 2s ease-in-out infinite;
+    }
+
+    @keyframes pqc-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(6, 182, 212, 0.2), inset 0 1px 0 rgba(255,255,255,0.05); }
+      50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.4), inset 0 1px 0 rgba(255,255,255,0.08); }
     }
 
     @keyframes shimmer {
@@ -1016,10 +1040,14 @@
 
     // Icon component wrapper for Lucide
     const Icon = ({ name, className, style }) => {
+      const iconRef = React.useRef(null);
       useEffect(() => {
-        lucide.createIcons();
-      });
+        if (iconRef.current) {
+          lucide.createIcons({ nodes: [iconRef.current] });
+        }
+      }, [name]);
       return React.createElement('i', {
+        ref: iconRef,
         'data-lucide': name.replace(/([A-Z])/g, '-$1').toLowerCase().substring(1),
         className,
         style
@@ -1127,12 +1155,10 @@
           {[0, 40, 80, 120].map((y) => (
             <line key={`h-${y}`} x1="0" y1={y} x2="120" y2={y} stroke="url(#latticeGrad)" strokeWidth="0.5" />
           ))}
-          {/* Lattice nodes */}
+          {/* Lattice nodes - using CSS animation instead of SVG animate */}
           {[0, 40, 80, 120].flatMap((x) =>
             [0, 40, 80, 120].map((y) => (
-              <circle key={`n-${x}-${y}`} cx={x} cy={y} r="2" fill="#10B981" opacity="0.5">
-                <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite" begin={`${(x + y) / 80}s`} />
-              </circle>
+              <circle key={`n-${x}-${y}`} cx={x} cy={y} r="2" fill="#10B981" className="lattice-node" style={{ animationDelay: `${(x + y) / 80}s` }} />
             ))
           )}
         </svg>
@@ -1359,14 +1385,9 @@
             {/* Sidebar */}
             <aside className="w-72 p-6 flex flex-col fixed h-full z-20 border-r border-emerald-900/30" style={{ background: 'rgba(10, 15, 13, 0.95)', backdropFilter: 'blur(20px)' }}>
               {/* Logo */}
-              <div className="flex items-center gap-4 mb-10">
-                <div className="tm-icon-box icon-md" style={{ background: 'var(--gradient-emerald)' }}>
-                  <Icon name="Gem" className="w-6 h-6 text-black" />
-                </div>
-                <div>
-                  <h1 className="font-display font-bold text-xl text-gradient">StablePay</h1>
-                  <p className="text-[11px] text-emerald-700 tracking-wider uppercase">Enterprise Platform</p>
-                </div>
+              <div className="mb-6">
+                <img src="stablepay_logo01.png" alt="StablePay" style={{ height: '320px', width: 'auto', marginLeft: '-45px', marginTop: '-80px', marginBottom: '-120px' }} />
+                <p className="text-[10px] tracking-wider uppercase text-right" style={{ color: '#475569' }}>Web3.0 Platform</p>
               </div>
 
               {/* Quick Balance */}
@@ -1440,12 +1461,12 @@
                 </div>
                 <div className="flex items-center gap-3">
                   {/* PQC Secure Connection Indicator */}
-                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl" style={{ background: 'rgba(6, 182, 212, 0.1)', border: '1px solid rgba(6, 182, 212, 0.2)' }}>
-                    <div className="relative">
-                      <Icon name="Shield" className="w-4 h-4 text-cyan-400" />
-                      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full" style={{ background: '#06B6D4', boxShadow: '0 0 6px #06B6D4' }} />
-                    </div>
-                    <span className="text-cyan-400 text-xs font-medium">PQC Secured</span>
+                  <div className="pqc-badge-glow flex items-center gap-2 px-4 py-2 rounded-full" style={{
+                    background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.12) 0%, rgba(16, 185, 129, 0.08) 100%)',
+                    border: '1px solid rgba(6, 182, 212, 0.25)'
+                  }}>
+                    <Icon name="ShieldCheck" className="w-4 h-4 text-cyan-400" />
+                    <span className="text-cyan-400 text-xs font-semibold tracking-wide">PQC Secured</span>
                   </div>
                   <button className="tm-icon-box icon-sm" style={{ background: 'var(--tm-surface-2)', border: '1px solid rgba(16, 185, 129, 0.1)' }}>
                     <Icon name="Bell" className="w-5 h-5 text-emerald-500" />
@@ -2349,17 +2370,17 @@
                         </div>
                         <div className="space-y-2">
                           {[
-                            { id: 'hybrid', label: 'Hybrid', desc: 'ECDSA + Dilithium (Recommended)', color: '#06B6D4' },
-                            { id: 'pqc', label: 'PQC Only', desc: 'Dilithium-3 only', color: '#8B5CF6' },
-                            { id: 'classical', label: 'Classical', desc: 'ECDSA only (Legacy)', color: '#F59E0B' },
+                            { id: 'hybrid', label: 'Hybrid', desc: 'ECDSA + Dilithium (Recommended)', color: '#06B6D4', bgColor: 'rgba(6, 182, 212, 0.08)', borderColor: 'rgba(6, 182, 212, 0.25)' },
+                            { id: 'pqc', label: 'PQC Only', desc: 'Dilithium-3 only', color: '#8B5CF6', bgColor: 'rgba(139, 92, 246, 0.08)', borderColor: 'rgba(139, 92, 246, 0.25)' },
+                            { id: 'classical', label: 'Classical', desc: 'ECDSA only (Legacy)', color: '#F59E0B', bgColor: 'rgba(245, 158, 11, 0.08)', borderColor: 'rgba(245, 158, 11, 0.25)' },
                           ].map((mode) => (
                             <button
                               key={mode.id}
                               onClick={() => setPqcSignatureMode(mode.id)}
                               className="w-full p-3 rounded-lg text-left transition-all"
                               style={{
-                                background: pqcSignatureMode === mode.id ? `${mode.color}15` : 'var(--tm-surface-2)',
-                                border: pqcSignatureMode === mode.id ? `1px solid ${mode.color}40` : '1px solid transparent',
+                                background: pqcSignatureMode === mode.id ? mode.bgColor : 'var(--tm-surface-2)',
+                                border: pqcSignatureMode === mode.id ? `1px solid ${mode.borderColor}` : '1px solid transparent',
                               }}
                             >
                               <div className="flex items-center justify-between">
