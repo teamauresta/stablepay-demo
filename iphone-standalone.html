@@ -579,12 +579,18 @@
     ];
 
     const transactions = [
-      { id: 1, type: 'receive', amount: 5000, asset: 'SUSD', from: '0x1234...5678', time: '2 min ago', hash: '0xabc...def' },
-      { id: 2, type: 'send', amount: 1200, asset: 'SET', to: '0x8765...4321', time: '15 min ago', hash: '0x123...789' },
-      { id: 3, type: 'exchange', amount: 2500, asset: 'SUSD → SET', time: '1 hour ago', hash: '0xdef...abc' },
-      { id: 4, type: 'receive', amount: 10000, asset: 'SUSD', from: '0xabcd...efgh', time: '3 hours ago', hash: '0x456...012' },
-      { id: 5, type: 'p2p', amount: 500, asset: 'SET', to: 'CryptoWhale', time: '5 hours ago', hash: '0x789...345' },
+      { id: 1, type: 'receive', amount: 5000, asset: 'SUSD', from: '0x1234...5678', time: '2 min ago', hash: '0xabc...def', sigType: 'hybrid' },
+      { id: 2, type: 'send', amount: 1200, asset: 'SET', to: '0x8765...4321', time: '15 min ago', hash: '0x123...789', sigType: 'hybrid' },
+      { id: 3, type: 'exchange', amount: 2500, asset: 'SUSD → SET', time: '1 hour ago', hash: '0xdef...abc', sigType: 'pqc' },
+      { id: 4, type: 'receive', amount: 10000, asset: 'SUSD', from: '0xabcd...efgh', time: '3 hours ago', hash: '0x456...012', sigType: 'hybrid' },
+      { id: 5, type: 'p2p', amount: 500, asset: 'SET', to: 'CryptoWhale', time: '5 hours ago', hash: '0x789...345', sigType: 'classical' },
     ];
+
+    const sigTypeConfig = {
+      hybrid: { label: 'Hybrid', icon: 'shield-check', color: '#06B6D4' },
+      pqc: { label: 'PQC', icon: 'lock', color: '#8B5CF6' },
+      classical: { label: 'Classic', icon: 'key', color: '#F59E0B' },
+    };
 
     const p2pOrders = [
       { id: 1, merchant: 'CryptoWhale', rating: 4.9, trades: 1250, type: 'buy', price: 1.001, amount: 5000, asset: 'SUSD' },
@@ -757,13 +763,16 @@
       const [expandedAsset, setExpandedAsset] = useState(null);
       const [chartTimeframe, setChartTimeframe] = useState('24h');
       const [network, setNetwork] = useState('mainnet');
+      const [pqcSignatureMode, setPqcSignatureMode] = useState('hybrid');
+      const [pqcMigrationEnabled, setPqcMigrationEnabled] = useState(true);
+      const [pqcBackupEncryption, setPqcBackupEncryption] = useState(true);
 
       const totalBalance = assets.reduce((sum, a) => sum + a.balance, 0);
       const walletAddress = '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf';
 
       useEffect(() => {
         lucide.createIcons();
-      }, [activeTab, showSendSheet, showReceiveSheet, showSwapSheet, showP2PSheet, sendStep, swapComplete, balanceHidden, kycLevel, twoFAEnabled, accountFrozen, darkMode, notifications, network]);
+      }, [activeTab, showSendSheet, showReceiveSheet, showSwapSheet, showP2PSheet, sendStep, swapComplete, balanceHidden, kycLevel, twoFAEnabled, accountFrozen, darkMode, notifications, network, pqcSignatureMode, pqcMigrationEnabled, pqcBackupEncryption]);
 
       const copyAddress = () => {
         navigator.clipboard.writeText(walletAddress);
@@ -835,7 +844,13 @@
                 {/* Balance Card */}
                 <div className="tm-card p-5 mb-5">
                   <div className="flex items-center justify-between mb-2">
-                    <span style={{ color: '#047857', fontSize: 12, fontWeight: 500, letterSpacing: 1 }}>TOTAL BALANCE</span>
+                    <div className="flex items-center gap-2">
+                      <span style={{ color: '#047857', fontSize: 12, fontWeight: 500, letterSpacing: 1 }}>TOTAL BALANCE</span>
+                      <div className="flex items-center gap-1 px-2 py-1 rounded-lg" style={{ background: 'rgba(6, 182, 212, 0.15)', border: '1px solid rgba(6, 182, 212, 0.3)' }}>
+                        <i data-lucide="shield" className="w-3 h-3" style={{ color: '#06B6D4' }}></i>
+                        <span style={{ color: '#06B6D4', fontSize: 9, fontWeight: 600 }}>PQC</span>
+                      </div>
+                    </div>
                     <div className="flex items-center gap-2">
                       <div className="status-dot" />
                       <button onClick={() => setBalanceHidden(!balanceHidden)} className="p-1">
@@ -903,13 +918,21 @@
                     <button style={{ color: '#10B981', fontSize: 13, fontWeight: 500 }}>See All</button>
                   </div>
                   <div className="tm-card overflow-hidden">
-                    {transactions.slice(0, 4).map((tx) => (
+                    {transactions.slice(0, 4).map((tx) => {
+                      const sig = sigTypeConfig[tx.sigType];
+                      return (
                       <div key={tx.id} className="ios-list-item">
                         <div className="w-10 h-10 rounded-xl flex items-center justify-center mr-3" style={{ background: tx.type === 'receive' ? 'rgba(16, 185, 129, 0.15)' : tx.type === 'send' ? 'rgba(59, 130, 246, 0.15)' : tx.type === 'exchange' ? 'rgba(139, 92, 246, 0.15)' : 'rgba(6, 182, 212, 0.15)' }}>
                           {tx.type === 'receive' ? <Icon name="ArrowDownLeft" className="w-5 h-5" style={{ color: '#34D399' }} /> : tx.type === 'send' ? <Icon name="ArrowUpRight" className="w-5 h-5" style={{ color: '#60A5FA' }} /> : tx.type === 'exchange' ? <Icon name="ArrowRightLeft" className="w-5 h-5" style={{ color: '#A78BFA' }} /> : <Icon name="Users" className="w-5 h-5" style={{ color: '#22D3EE' }} />}
                         </div>
                         <div className="flex-1">
-                          <TxBadge type={tx.type} />
+                          <div className="flex items-center gap-2">
+                            <TxBadge type={tx.type} />
+                            <div className="flex items-center gap-1 px-1.5 py-0.5 rounded" style={{ background: `${sig.color}15`, border: `1px solid ${sig.color}30` }}>
+                              <i data-lucide={sig.icon} style={{ width: 8, height: 8, color: sig.color }}></i>
+                              <span style={{ fontSize: 8, color: sig.color, fontWeight: 500 }}>{sig.label}</span>
+                            </div>
+                          </div>
                           <p style={{ color: '#047857', fontSize: 12, marginTop: 2 }}>{tx.time}</p>
                         </div>
                         <div className="text-right">
@@ -919,7 +942,8 @@
                           <p style={{ color: '#047857', fontSize: 11 }}>{tx.asset.split(' ')[0]}</p>
                         </div>
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -1275,7 +1299,7 @@
                 </div>
 
                 {/* Security Score */}
-                <div className="tm-card p-5">
+                <div className="tm-card p-5 mb-5">
                   <div className="flex items-center justify-between mb-4">
                     <p style={{ fontWeight: 600, color: '#F0FDF4', fontSize: 16 }}>Security Score</p>
                     <span className="tm-badge tm-badge-receive">Excellent</span>
@@ -1301,6 +1325,43 @@
                       <div className="flex items-center gap-2"><Icon name="CheckCircle" className="w-4 h-4" style={{ color: '#34D399' }} /><span style={{ color: '#34D399', fontSize: 13 }}>KYC Level {kycLevel}</span></div>
                       <div className="flex items-center gap-2"><Icon name="CheckCircle" className="w-4 h-4" style={{ color: '#34D399' }} /><span style={{ color: '#34D399', fontSize: 13 }}>Email Verified</span></div>
                     </div>
+                  </div>
+                </div>
+
+                {/* Post-Quantum Cryptography */}
+                <div className="tm-card p-5" style={{ border: '1px solid rgba(6, 182, 212, 0.3)' }}>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <div className="relative">
+                        <Icon name="ShieldCheck" className="w-5 h-5" style={{ color: '#06B6D4' }} />
+                        <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full" style={{ background: '#06B6D4', boxShadow: '0 0 6px #06B6D4' }} />
+                      </div>
+                      <p style={{ fontWeight: 600, color: '#F0FDF4', fontSize: 16 }}>Cryptography</p>
+                    </div>
+                    <span className="px-2 py-1 rounded text-xs" style={{ background: 'rgba(6, 182, 212, 0.2)', color: '#06B6D4', fontWeight: 500 }}>PQC Ready</span>
+                  </div>
+                  <div className="space-y-3">
+                    {[
+                      { name: 'CRYSTALS-Dilithium', type: 'Digital Signatures', icon: 'PenTool', status: 'Active' },
+                      { name: 'CRYSTALS-Kyber', type: 'Key Exchange', icon: 'Key', status: 'Active' },
+                      { name: 'SHA-3 / SHAKE', type: 'Hashing', icon: 'Hash', status: 'Active' },
+                    ].map((algo) => (
+                      <div key={algo.name} className="flex items-center justify-between p-3 rounded-xl" style={{ background: 'rgba(6, 182, 212, 0.05)' }}>
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: 'rgba(6, 182, 212, 0.15)' }}>
+                            <Icon name={algo.icon} className="w-4 h-4" style={{ color: '#06B6D4' }} />
+                          </div>
+                          <div>
+                            <p style={{ fontWeight: 500, color: '#F0FDF4', fontSize: 13 }}>{algo.name}</p>
+                            <p style={{ color: '#047857', fontSize: 11 }}>{algo.type}</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <div className="w-2 h-2 rounded-full" style={{ background: '#06B6D4', boxShadow: '0 0 6px #06B6D4' }} />
+                          <span style={{ fontSize: 11, color: '#06B6D4' }}>{algo.status}</span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -1378,6 +1439,88 @@
                       <button onClick={() => setNotifications(!notifications)} className={`toggle-switch ${notifications ? 'active' : ''}`} style={{ background: notifications ? 'linear-gradient(135deg, #10B981, #059669)' : 'var(--tm-surface-2)' }}>
                         <div className="toggle-knob" />
                       </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Post-Quantum Security */}
+                <div className="mb-4">
+                  <div className="flex items-center gap-2 mb-2 px-1">
+                    <p style={{ color: '#06B6D4', fontSize: 12, letterSpacing: 1 }}>POST-QUANTUM SECURITY</p>
+                    <span className="px-1.5 py-0.5 rounded text-[8px]" style={{ background: 'rgba(6, 182, 212, 0.2)', color: '#06B6D4', fontWeight: 500 }}>NIST</span>
+                  </div>
+                  <div className="tm-card overflow-hidden" style={{ border: '1px solid rgba(6, 182, 212, 0.2)' }}>
+                    {/* Signature Mode */}
+                    <div className="p-4" style={{ borderBottom: '1px solid rgba(6, 78, 59, 0.2)' }}>
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{ background: 'rgba(6, 182, 212, 0.15)' }}>
+                          <Icon name="PenTool" className="w-4 h-4" style={{ color: '#06B6D4' }} />
+                        </div>
+                        <div>
+                          <p style={{ color: '#F0FDF4', fontSize: 15, fontWeight: 500 }}>Signature Mode</p>
+                          <p style={{ color: '#047857', fontSize: 11 }}>Transaction signing algorithm</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        {[
+                          { id: 'hybrid', label: 'Hybrid', color: '#06B6D4' },
+                          { id: 'pqc', label: 'PQC', color: '#8B5CF6' },
+                          { id: 'classical', label: 'Classic', color: '#F59E0B' },
+                        ].map((mode) => (
+                          <button
+                            key={mode.id}
+                            onClick={() => setPqcSignatureMode(mode.id)}
+                            className="flex-1 py-2 rounded-lg text-xs font-medium transition-all"
+                            style={{
+                              background: pqcSignatureMode === mode.id ? `${mode.color}20` : 'var(--tm-surface-2)',
+                              border: pqcSignatureMode === mode.id ? `1px solid ${mode.color}50` : '1px solid transparent',
+                              color: pqcSignatureMode === mode.id ? mode.color : '#047857',
+                            }}
+                          >
+                            {mode.label}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Auto-Migration Toggle */}
+                    <div className="ios-list-item">
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center mr-3" style={{ background: 'rgba(6, 182, 212, 0.15)' }}>
+                        <Icon name="RefreshCw" className="w-4 h-4" style={{ color: '#06B6D4' }} />
+                      </div>
+                      <div className="flex-1">
+                        <p style={{ color: '#F0FDF4', fontSize: 15 }}>Auto-Migration</p>
+                        <p style={{ color: '#047857', fontSize: 11 }}>Upgrade keys when available</p>
+                      </div>
+                      <button onClick={() => setPqcMigrationEnabled(!pqcMigrationEnabled)} className={`toggle-switch ${pqcMigrationEnabled ? 'active' : ''}`} style={{ background: pqcMigrationEnabled ? '#06B6D4' : 'var(--tm-surface-2)' }}>
+                        <div className="toggle-knob" />
+                      </button>
+                    </div>
+
+                    {/* PQC Backup Encryption */}
+                    <div className="ios-list-item">
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center mr-3" style={{ background: 'rgba(6, 182, 212, 0.15)' }}>
+                        <Icon name="HardDrive" className="w-4 h-4" style={{ color: '#06B6D4' }} />
+                      </div>
+                      <div className="flex-1">
+                        <p style={{ color: '#F0FDF4', fontSize: 15 }}>PQC Backup</p>
+                        <p style={{ color: '#047857', fontSize: 11 }}>{pqcBackupEncryption ? 'Kyber-1024' : 'AES-256'}</p>
+                      </div>
+                      <button onClick={() => setPqcBackupEncryption(!pqcBackupEncryption)} className={`toggle-switch ${pqcBackupEncryption ? 'active' : ''}`} style={{ background: pqcBackupEncryption ? '#06B6D4' : 'var(--tm-surface-2)' }}>
+                        <div className="toggle-knob" />
+                      </button>
+                    </div>
+
+                    {/* Migration Status */}
+                    <div className="p-4" style={{ background: 'rgba(6, 182, 212, 0.05)' }}>
+                      <div className="flex items-center justify-between mb-2">
+                        <span style={{ color: '#06B6D4', fontSize: 11, fontWeight: 500 }}>Migration Status</span>
+                        <span style={{ color: '#06B6D4', fontSize: 11 }}>100%</span>
+                      </div>
+                      <div className="h-2 rounded-full overflow-hidden" style={{ background: 'var(--tm-surface-2)' }}>
+                        <div className="h-full rounded-full" style={{ width: '100%', background: 'linear-gradient(90deg, #06B6D4, #8B5CF6)' }} />
+                      </div>
+                      <p style={{ color: '#047857', fontSize: 10, marginTop: 4 }}>All keys upgraded to hybrid mode</p>
                     </div>
                   </div>
                 </div>

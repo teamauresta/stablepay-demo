@@ -158,213 +158,234 @@
     }
 
     /* Premium Floating Elements */
-    .float-element {
-      position: absolute;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    /* Glass Orb - Premium translucent sphere */
-    .float-orb {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%,
-        rgba(16, 185, 129, 0.15) 0%,
-        rgba(16, 185, 129, 0.05) 40%,
-        rgba(6, 78, 59, 0.1) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.15);
-      box-shadow:
-        0 8px 32px rgba(16, 185, 129, 0.1),
-        inset 0 0 30px rgba(16, 185, 129, 0.05);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      animation: float-gentle 12s ease-in-out infinite;
-    }
-
-    .float-orb::before {
-      content: '';
-      position: absolute;
-      top: 15%;
-      left: 20%;
-      width: 30%;
-      height: 20%;
-      background: radial-gradient(ellipse, rgba(255,255,255,0.2) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    /* Gradient Ring - Elegant rotating ring */
-    .float-ring {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: transparent;
-      border: 1px solid transparent;
-      position: relative;
-      animation: rotate-elegant 30s linear infinite;
-    }
-
-    .float-ring::before {
-      content: '';
+    /* Quantum Particle System */
+    .quantum-field {
       position: absolute;
       inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    /* Quantum Particle - Core glowing point */
+    .quantum-particle {
+      position: absolute;
       border-radius: 50%;
-      padding: 1px;
-      background: linear-gradient(135deg,
-        rgba(16, 185, 129, 0.4) 0%,
-        rgba(16, 185, 129, 0.05) 25%,
-        rgba(139, 92, 246, 0.2) 50%,
-        rgba(139, 92, 246, 0.05) 75%,
-        rgba(16, 185, 129, 0.3) 100%);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
+      pointer-events: none;
     }
 
-    /* Hexagon - Modern geometric shape */
-    .float-hex {
-      width: 50px;
-      height: 57px;
-      background: linear-gradient(180deg,
-        rgba(16, 185, 129, 0.12) 0%,
-        rgba(6, 182, 212, 0.08) 100%);
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      animation: float-hex 15s ease-in-out infinite;
-      opacity: 0.6;
-    }
-
-    .float-hex::before {
+    .quantum-particle::before {
       content: '';
       position: absolute;
-      inset: 1px;
-      background: linear-gradient(180deg,
-        rgba(10, 15, 13, 0.8) 0%,
-        rgba(10, 15, 13, 0.6) 100%);
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    }
-
-    /* Premium Diamond */
-    .float-diamond {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg,
-        rgba(16, 185, 129, 0.2) 0%,
-        rgba(52, 211, 153, 0.1) 50%,
-        rgba(6, 182, 212, 0.15) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.2);
-      transform: rotate(45deg);
-      animation: float-diamond 10s ease-in-out infinite;
-      box-shadow: 0 4px 20px rgba(16, 185, 129, 0.1);
-    }
-
-    /* Dot Grid Pattern */
-    .float-dots {
-      width: 100px;
-      height: 100px;
-      background-image: radial-gradient(rgba(16, 185, 129, 0.3) 1px, transparent 1px);
-      background-size: 12px 12px;
+      inset: -50%;
+      border-radius: 50%;
+      background: radial-gradient(circle, currentColor 0%, transparent 70%);
       opacity: 0.4;
-      animation: float-fade 8s ease-in-out infinite;
+      animation: quantum-pulse 3s ease-in-out infinite;
     }
 
-    /* Glowing Line */
-    .float-line {
-      width: 80px;
+    /* Entangled Pair - Two particles connected */
+    .quantum-entangled {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .quantum-entangled::before,
+    .quantum-entangled::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #06B6D4;
+      box-shadow: 0 0 10px #06B6D4, 0 0 20px rgba(6, 182, 212, 0.5);
+    }
+
+    .quantum-entangled::before {
+      top: 0;
+      left: 0;
+      animation: entangle-a 8s ease-in-out infinite;
+    }
+
+    .quantum-entangled::after {
+      top: 0;
+      left: 60px;
+      animation: entangle-b 8s ease-in-out infinite;
+    }
+
+    /* Wave Function - Probability cloud */
+    .quantum-wave {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center,
+        rgba(16, 185, 129, 0.08) 0%,
+        rgba(6, 182, 212, 0.04) 40%,
+        transparent 70%);
+      animation: wave-collapse 12s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    /* Quantum Tunnel - Energy flow line */
+    .quantum-tunnel {
+      position: absolute;
       height: 1px;
       background: linear-gradient(90deg,
         transparent 0%,
-        rgba(16, 185, 129, 0.5) 50%,
+        rgba(6, 182, 212, 0.6) 20%,
+        rgba(16, 185, 129, 0.8) 50%,
+        rgba(139, 92, 246, 0.6) 80%,
         transparent 100%);
-      animation: float-line 6s ease-in-out infinite;
-      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+      animation: tunnel-flow 4s linear infinite;
+      pointer-events: none;
+      opacity: 0.6;
     }
 
-    /* Particle - Subtle floating dot */
-    .float-particle {
+    .quantum-tunnel::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: inherit;
+      filter: blur(4px);
+      opacity: 0.5;
+    }
+
+    /* Superposition State - Flickering existence */
+    .quantum-superposition {
+      position: absolute;
+      width: 6px;
+      height: 6px;
       border-radius: 50%;
-      background: radial-gradient(circle,
-        rgba(16, 185, 129, 0.6) 0%,
-        rgba(16, 185, 129, 0.2) 50%,
-        transparent 70%);
-      box-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+      pointer-events: none;
+      animation: superposition 2s steps(2) infinite;
     }
 
-    @keyframes float-gentle {
+    .quantum-superposition::before {
+      content: '';
+      position: absolute;
+      inset: -100%;
+      border-radius: 50%;
+      background: radial-gradient(circle, currentColor 0%, transparent 60%);
+      opacity: 0.3;
+    }
+
+    /* Orbital Ring - Electron path */
+    .quantum-orbital {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(6, 182, 212, 0.2);
+      pointer-events: none;
+      animation: orbital-rotate 20s linear infinite;
+    }
+
+    .quantum-orbital::before {
+      content: '';
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #06B6D4;
+      box-shadow: 0 0 8px #06B6D4, 0 0 15px rgba(6, 182, 212, 0.6);
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Energy Node - Intersection point */
+    .quantum-node {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 6px #10B981, 0 0 12px rgba(16, 185, 129, 0.4);
+      pointer-events: none;
+      animation: node-pulse 4s ease-in-out infinite;
+    }
+
+    /* Lattice Grid - Quantum structure */
+    .quantum-lattice {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      pointer-events: none;
+      opacity: 0.3;
+      animation: lattice-shift 15s ease-in-out infinite;
+    }
+
+    @keyframes quantum-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.5); opacity: 0.2; }
+    }
+
+    @keyframes entangle-a {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(20px, -30px); }
+      50% { transform: translate(40px, 0); }
+      75% { transform: translate(20px, 30px); }
+    }
+
+    @keyframes entangle-b {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(-20px, 30px); }
+      50% { transform: translate(-40px, 0); }
+      75% { transform: translate(-20px, -30px); }
+    }
+
+    @keyframes wave-collapse {
       0%, 100% {
-        transform: translate(0, 0) scale(1);
+        transform: scale(1) rotate(0deg);
         opacity: 0.6;
       }
       25% {
-        transform: translate(10px, -15px) scale(1.02);
+        transform: scale(1.1) rotate(90deg);
+        opacity: 0.4;
       }
       50% {
-        transform: translate(5px, -25px) scale(1);
+        transform: scale(0.9) rotate(180deg);
         opacity: 0.8;
       }
       75% {
-        transform: translate(-5px, -10px) scale(0.98);
+        transform: scale(1.05) rotate(270deg);
+        opacity: 0.5;
       }
     }
 
-    @keyframes rotate-elegant {
+    @keyframes tunnel-flow {
+      0% { transform: translateX(-100%) scaleX(0.5); opacity: 0; }
+      10% { opacity: 0.6; }
+      90% { opacity: 0.6; }
+      100% { transform: translateX(100%) scaleX(0.5); opacity: 0; }
+    }
+
+    @keyframes superposition {
+      0%, 49% { opacity: 0.8; transform: scale(1); }
+      50%, 100% { opacity: 0.3; transform: scale(0.6); }
+    }
+
+    @keyframes orbital-rotate {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
 
-    @keyframes float-hex {
-      0%, 100% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0.5;
-      }
-      50% {
-        transform: translateY(-20px) rotate(5deg);
-        opacity: 0.7;
-      }
+    @keyframes node-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 6px #10B981, 0 0 12px rgba(16, 185, 129, 0.4); }
+      50% { transform: scale(1.5); box-shadow: 0 0 10px #10B981, 0 0 20px rgba(16, 185, 129, 0.6); }
     }
 
-    @keyframes float-diamond {
-      0%, 100% {
-        transform: rotate(45deg) translateY(0) scale(1);
-        opacity: 0.6;
-      }
-      50% {
-        transform: rotate(45deg) translateY(-15px) scale(1.05);
-        opacity: 0.8;
-      }
+    @keyframes lattice-shift {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+      50% { transform: translate(10px, -10px) rotate(5deg); opacity: 0.5; }
     }
 
-    @keyframes float-fade {
-      0%, 100% {
-        transform: translate(0, 0);
-        opacity: 0.3;
-      }
-      50% {
-        transform: translate(10px, -10px);
-        opacity: 0.5;
-      }
-    }
-
-    @keyframes float-line {
-      0%, 100% {
-        transform: translateX(0) scaleX(1);
-        opacity: 0.4;
-      }
-      50% {
-        transform: translateX(20px) scaleX(1.2);
-        opacity: 0.7;
-      }
-    }
-
-    @keyframes float-slow {
-      0%, 100% {
-        transform: translate(0, 0);
-        opacity: 0.4;
-      }
-      50% {
-        transform: translate(15px, -20px);
-        opacity: 0.7;
-      }
+    @keyframes particle-drift {
+      0%, 100% { transform: translate(0, 0); }
+      25% { transform: translate(var(--drift-x, 10px), var(--drift-y, -15px)); }
+      50% { transform: translate(calc(var(--drift-x, 10px) * 0.5), calc(var(--drift-y, -15px) * 1.5)); }
+      75% { transform: translate(calc(var(--drift-x, 10px) * -0.5), calc(var(--drift-y, -15px) * 0.5)); }
     }
 
     @keyframes pulse-glow {
@@ -979,12 +1000,19 @@
     ];
 
     const transactions = [
-      { id: 1, type: 'receive', amount: 5000, asset: 'SUSD', from: '0x1234...5678', time: '2 min ago', hash: '0xabc...def' },
-      { id: 2, type: 'send', amount: 1200, asset: 'SET', to: '0x8765...4321', time: '15 min ago', hash: '0x123...789' },
-      { id: 3, type: 'exchange', amount: 2500, asset: 'SUSD → SET', time: '1 hour ago', hash: '0xdef...abc' },
-      { id: 4, type: 'receive', amount: 10000, asset: 'SUSD', from: '0xabcd...efgh', time: '3 hours ago', hash: '0x456...012' },
-      { id: 5, type: 'p2p', amount: 500, asset: 'SET', to: 'Merchant Pro', time: '5 hours ago', hash: '0x789...345' },
+      { id: 1, type: 'receive', amount: 5000, asset: 'SUSD', from: '0x1234...5678', time: '2 min ago', hash: '0xabc...def', sigType: 'hybrid' },
+      { id: 2, type: 'send', amount: 1200, asset: 'SET', to: '0x8765...4321', time: '15 min ago', hash: '0x123...789', sigType: 'hybrid' },
+      { id: 3, type: 'exchange', amount: 2500, asset: 'SUSD → SET', time: '1 hour ago', hash: '0xdef...abc', sigType: 'pqc' },
+      { id: 4, type: 'receive', amount: 10000, asset: 'SUSD', from: '0xabcd...efgh', time: '3 hours ago', hash: '0x456...012', sigType: 'hybrid' },
+      { id: 5, type: 'p2p', amount: 500, asset: 'SET', to: 'Merchant Pro', time: '5 hours ago', hash: '0x789...345', sigType: 'classical' },
     ];
+
+    // Signature type config for PQC badges
+    const sigTypeConfig = {
+      hybrid: { label: 'Hybrid', icon: 'ShieldCheck', color: '#06B6D4', desc: 'ECDSA + Dilithium' },
+      pqc: { label: 'PQC', icon: 'Lock', color: '#8B5CF6', desc: 'Dilithium-3' },
+      classical: { label: 'Classical', icon: 'Key', color: '#F59E0B', desc: 'ECDSA' },
+    };
 
     // Icon component wrapper for Lucide
     const Icon = ({ name, className, style }) => {
@@ -1000,74 +1028,130 @@
 
     // 3D Floating Elements Component
     const FloatingElements = () => (
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Large Glass Orb - Top right */}
-        <div
-          className="float-element float-orb"
-          style={{ top: '10%', right: '8%', animationDelay: '0s' }}
-        />
+      <div className="quantum-field">
+        {/* Quantum Wave Functions - Probability clouds */}
+        <div className="quantum-wave" style={{ top: '15%', right: '10%', animationDelay: '0s' }} />
+        <div className="quantum-wave" style={{ bottom: '20%', left: '5%', width: 100, height: 100, animationDelay: '-4s' }} />
+        <div className="quantum-wave" style={{ top: '60%', right: '30%', width: 80, height: 80, animationDelay: '-8s' }} />
 
-        {/* Smaller Glass Orb - Middle */}
-        <div
-          className="float-element float-orb"
-          style={{ top: '55%', right: '25%', width: 50, height: 50, animationDelay: '-4s' }}
-        />
+        {/* Orbital Rings - Electron paths */}
+        <div className="quantum-orbital" style={{ top: '25%', left: '8%', width: 100, height: 100, animationDelay: '0s' }} />
+        <div className="quantum-orbital" style={{ bottom: '15%', right: '12%', width: 70, height: 70, animationDelay: '-5s', animationDirection: 'reverse' }} />
 
-        {/* Elegant Gradient Ring */}
-        <div
-          className="float-element float-ring"
-          style={{ top: '25%', left: '3%' }}
-        />
+        {/* Entangled Particle Pairs */}
+        <div className="quantum-entangled" style={{ top: '35%', right: '20%', animationDelay: '0s' }} />
+        <div className="quantum-entangled" style={{ bottom: '40%', left: '20%', animationDelay: '-3s' }} />
 
-        {/* Second Ring - Smaller */}
-        <div
-          className="float-element float-ring"
-          style={{ bottom: '15%', right: '5%', width: 80, height: 80, animationDelay: '-10s' }}
-        />
+        {/* Quantum Tunnels - Energy flow lines */}
+        <div className="quantum-tunnel" style={{ top: '30%', left: '0%', width: '40%', transform: 'rotate(-5deg)', animationDelay: '0s' }} />
+        <div className="quantum-tunnel" style={{ bottom: '35%', right: '0%', width: '35%', transform: 'rotate(8deg)', animationDelay: '-2s' }} />
+        <div className="quantum-tunnel" style={{ top: '70%', left: '10%', width: '30%', transform: 'rotate(-12deg)', animationDelay: '-4s' }} />
 
-        {/* Hexagon */}
-        <div
-          className="float-element float-hex"
-          style={{ top: '70%', left: '8%', animationDelay: '-3s' }}
-        />
-
-        {/* Diamond */}
-        <div
-          className="float-element float-diamond"
-          style={{ top: '40%', right: '12%', animationDelay: '-2s' }}
-        />
-
-        {/* Dot Grid */}
-        <div
-          className="float-element float-dots"
-          style={{ bottom: '30%', left: '15%', animationDelay: '-5s' }}
-        />
-
-        {/* Glowing Lines */}
-        <div
-          className="float-element float-line"
-          style={{ top: '20%', right: '30%', transform: 'rotate(-15deg)', animationDelay: '-1s' }}
-        />
-        <div
-          className="float-element float-line"
-          style={{ bottom: '25%', left: '25%', transform: 'rotate(20deg)', animationDelay: '-3s' }}
-        />
-
-        {/* Subtle Particles - Fewer, more refined */}
-        {[...Array(6)].map((_, i) => (
+        {/* Superposition States - Flickering particles */}
+        {[
+          { top: '20%', left: '25%', color: '#10B981' },
+          { top: '45%', right: '15%', color: '#06B6D4' },
+          { bottom: '25%', left: '35%', color: '#8B5CF6' },
+          { top: '65%', left: '12%', color: '#06B6D4' },
+          { bottom: '45%', right: '25%', color: '#10B981' },
+        ].map((pos, i) => (
           <div
-            key={i}
-            className="float-element float-particle"
+            key={`super-${i}`}
+            className="quantum-superposition"
             style={{
-              width: `${3 + Math.random() * 4}px`,
-              height: `${3 + Math.random() * 4}px`,
-              top: `${20 + i * 12}%`,
-              left: `${15 + i * 12}%`,
-              animation: `float-slow ${10 + Math.random() * 5}s ease-in-out infinite`,
-              animationDelay: `${i * -2}s`,
+              ...pos,
+              color: pos.color,
+              background: pos.color,
+              boxShadow: `0 0 8px ${pos.color}, 0 0 15px ${pos.color}50`,
+              animationDelay: `${i * -0.4}s`,
             }}
           />
         ))}
+
+        {/* Energy Nodes - Intersection points */}
+        {[
+          { top: '15%', left: '40%' },
+          { top: '50%', right: '8%' },
+          { bottom: '30%', left: '45%' },
+          { top: '75%', right: '35%' },
+          { bottom: '15%', left: '22%' },
+          { top: '40%', left: '6%' },
+        ].map((pos, i) => (
+          <div
+            key={`node-${i}`}
+            className="quantum-node"
+            style={{
+              ...pos,
+              animationDelay: `${i * -0.7}s`,
+            }}
+          />
+        ))}
+
+        {/* Quantum Particles with drift */}
+        {[...Array(12)].map((_, i) => {
+          const colors = ['#10B981', '#06B6D4', '#8B5CF6'];
+          const color = colors[i % 3];
+          return (
+            <div
+              key={`particle-${i}`}
+              className="quantum-particle"
+              style={{
+                width: `${2 + (i % 3) * 2}px`,
+                height: `${2 + (i % 3) * 2}px`,
+                top: `${10 + (i * 7) % 80}%`,
+                left: `${5 + (i * 11) % 85}%`,
+                color: color,
+                background: color,
+                boxShadow: `0 0 6px ${color}, 0 0 12px ${color}40`,
+                animation: `particle-drift ${8 + i * 1.5}s ease-in-out infinite`,
+                animationDelay: `${i * -1.2}s`,
+                '--drift-x': `${10 + (i % 4) * 5}px`,
+                '--drift-y': `${-15 - (i % 3) * 10}px`,
+              }}
+            />
+          );
+        })}
+
+        {/* SVG Lattice Structure */}
+        <svg className="quantum-lattice" style={{ top: '20%', right: '5%' }} viewBox="0 0 120 120">
+          <defs>
+            <linearGradient id="latticeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#10B981" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#06B6D4" stopOpacity="0.1" />
+            </linearGradient>
+          </defs>
+          {/* Lattice lines */}
+          {[0, 40, 80, 120].map((x) => (
+            <line key={`v-${x}`} x1={x} y1="0" x2={x} y2="120" stroke="url(#latticeGrad)" strokeWidth="0.5" />
+          ))}
+          {[0, 40, 80, 120].map((y) => (
+            <line key={`h-${y}`} x1="0" y1={y} x2="120" y2={y} stroke="url(#latticeGrad)" strokeWidth="0.5" />
+          ))}
+          {/* Lattice nodes */}
+          {[0, 40, 80, 120].flatMap((x) =>
+            [0, 40, 80, 120].map((y) => (
+              <circle key={`n-${x}-${y}`} cx={x} cy={y} r="2" fill="#10B981" opacity="0.5">
+                <animate attributeName="opacity" values="0.3;0.7;0.3" dur="3s" repeatCount="indefinite" begin={`${(x + y) / 80}s`} />
+              </circle>
+            ))
+          )}
+        </svg>
+
+        {/* Second Lattice - Bottom left */}
+        <svg className="quantum-lattice" style={{ bottom: '10%', left: '8%', width: 80, height: 80, animationDelay: '-7s' }} viewBox="0 0 80 80">
+          <defs>
+            <linearGradient id="latticeGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#06B6D4" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#8B5CF6" stopOpacity="0.1" />
+            </linearGradient>
+          </defs>
+          {[0, 27, 53, 80].map((x) => (
+            <line key={`v2-${x}`} x1={x} y1="0" x2={x} y2="80" stroke="url(#latticeGrad2)" strokeWidth="0.5" />
+          ))}
+          {[0, 27, 53, 80].map((y) => (
+            <line key={`h2-${y}`} x1="0" y1={y} x2="80" y2={y} stroke="url(#latticeGrad2)" strokeWidth="0.5" />
+          ))}
+        </svg>
       </div>
     );
 
@@ -1216,6 +1300,12 @@
       const [swapComplete, setSwapComplete] = useState(false);
       const [expandedAsset, setExpandedAsset] = useState(null);
       const [chartTimeframe, setChartTimeframe] = useState('24h');
+      const [pqcSignatureMode, setPqcSignatureMode] = useState('hybrid');
+      const [pqcMigrationEnabled, setPqcMigrationEnabled] = useState(true);
+      const [pqcBackupEncryption, setPqcBackupEncryption] = useState(true);
+      const [showP2PModal, setShowP2PModal] = useState(false);
+      const [showOTCModal, setShowOTCModal] = useState(false);
+      const [p2pTab, setP2pTab] = useState('buy');
 
       const walletAddress = '0x7E5F4552091A69125d5DfCb7b8C2659029395Bdf';
       const totalBalance = assets.reduce((sum, asset) => sum + asset.balance, 0);
@@ -1349,6 +1439,14 @@
                   </p>
                 </div>
                 <div className="flex items-center gap-3">
+                  {/* PQC Secure Connection Indicator */}
+                  <div className="flex items-center gap-2 px-3 py-2 rounded-xl" style={{ background: 'rgba(6, 182, 212, 0.1)', border: '1px solid rgba(6, 182, 212, 0.2)' }}>
+                    <div className="relative">
+                      <Icon name="Shield" className="w-4 h-4 text-cyan-400" />
+                      <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full" style={{ background: '#06B6D4', boxShadow: '0 0 6px #06B6D4' }} />
+                    </div>
+                    <span className="text-cyan-400 text-xs font-medium">PQC Secured</span>
+                  </div>
                   <button className="tm-icon-box icon-sm" style={{ background: 'var(--tm-surface-2)', border: '1px solid rgba(16, 185, 129, 0.1)' }}>
                     <Icon name="Bell" className="w-5 h-5 text-emerald-500" />
                   </button>
@@ -1405,7 +1503,7 @@
                         { icon: 'Send', label: 'Send', desc: 'Transfer funds', color: '#3B82F6', badge: 'send', action: () => setShowTransferModal(true) },
                         { icon: 'QrCode', label: 'Receive', desc: 'Get payment', color: '#10B981', badge: 'receive', action: () => setShowReceiveModal(true) },
                         { icon: 'ArrowRightLeft', label: 'Swap', desc: 'Exchange', color: '#8B5CF6', badge: 'exchange', action: () => setActiveTab('trading') },
-                        { icon: 'Users', label: 'P2P', desc: 'Trade', color: '#06B6D4', badge: 'p2p', action: () => {} },
+                        { icon: 'Users', label: 'P2P', desc: 'Trade', color: '#06B6D4', badge: 'p2p', action: () => setShowP2PModal(true) },
                       ].map((action, i) => (
                         <button
                           key={action.label}
@@ -1436,38 +1534,50 @@
                         </button>
                       </div>
                       <div className="divide-y divide-emerald-900/20">
-                        {transactions.slice(0, 4).map((tx) => (
-                          <div key={tx.id} className="p-4 flex items-center justify-between hover:bg-emerald-900/10 transition-colors">
-                            <div className="flex items-center gap-4">
-                              <div className={`tm-icon-box icon-sm`} style={{
-                                background: tx.type === 'receive' ? 'rgba(16, 185, 129, 0.15)' :
-                                           tx.type === 'send' ? 'rgba(59, 130, 246, 0.15)' :
-                                           tx.type === 'exchange' ? 'rgba(139, 92, 246, 0.15)' : 'rgba(6, 182, 212, 0.15)'
-                              }}>
-                                {tx.type === 'receive' ? <Icon name="ArrowDownLeft" className="w-5 h-5 text-emerald-400" /> :
-                                 tx.type === 'send' ? <Icon name="ArrowUpRight" className="w-5 h-5 text-blue-400" /> :
-                                 tx.type === 'exchange' ? <Icon name="ArrowRightLeft" className="w-5 h-5 text-purple-400" /> :
-                                 <Icon name="Users" className="w-5 h-5 text-cyan-400" />}
-                              </div>
-                              <div>
-                                <div className="flex items-center gap-2 mb-1">
-                                  <TxBadge type={tx.type} />
+                        {transactions.slice(0, 4).map((tx) => {
+                          const sig = sigTypeConfig[tx.sigType] || sigTypeConfig.hybrid;
+                          return (
+                            <div key={tx.id} className="p-4 flex items-center justify-between hover:bg-emerald-900/10 transition-colors">
+                              <div className="flex items-center gap-4">
+                                <div className={`tm-icon-box icon-sm`} style={{
+                                  background: tx.type === 'receive' ? 'rgba(16, 185, 129, 0.15)' :
+                                             tx.type === 'send' ? 'rgba(59, 130, 246, 0.15)' :
+                                             tx.type === 'exchange' ? 'rgba(139, 92, 246, 0.15)' : 'rgba(6, 182, 212, 0.15)'
+                                }}>
+                                  {tx.type === 'receive' ? <Icon name="ArrowDownLeft" className="w-5 h-5 text-emerald-400" /> :
+                                   tx.type === 'send' ? <Icon name="ArrowUpRight" className="w-5 h-5 text-blue-400" /> :
+                                   tx.type === 'exchange' ? <Icon name="ArrowRightLeft" className="w-5 h-5 text-purple-400" /> :
+                                   <Icon name="Users" className="w-5 h-5 text-cyan-400" />}
                                 </div>
-                                <p className="text-xs text-emerald-700">{tx.time}</p>
+                                <div>
+                                  <div className="flex items-center gap-2 mb-1">
+                                    <TxBadge type={tx.type} />
+                                    {/* PQC Signature Badge */}
+                                    <span
+                                      className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium"
+                                      style={{ background: `${sig.color}15`, color: sig.color, border: `1px solid ${sig.color}30` }}
+                                      title={sig.desc}
+                                    >
+                                      <Icon name={sig.icon} className="w-3 h-3" />
+                                      {sig.label}
+                                    </span>
+                                  </div>
+                                  <p className="text-xs text-emerald-700">{tx.time}</p>
+                                </div>
+                              </div>
+                              <div className="text-right">
+                                <p className={`font-semibold ${
+                                  tx.type === 'receive' ? 'text-emerald-400' :
+                                  tx.type === 'send' ? 'text-blue-400' : 'text-emerald-200'
+                                }`}>
+                                  {tx.type === 'receive' ? '+' : tx.type === 'send' ? '-' : ''}
+                                  {tx.amount.toLocaleString()} {tx.asset.split(' ')[0]}
+                                </p>
+                                <p className="text-xs text-emerald-800 mono">{tx.hash}</p>
                               </div>
                             </div>
-                            <div className="text-right">
-                              <p className={`font-semibold ${
-                                tx.type === 'receive' ? 'text-emerald-400' :
-                                tx.type === 'send' ? 'text-blue-400' : 'text-emerald-200'
-                              }`}>
-                                {tx.type === 'receive' ? '+' : tx.type === 'send' ? '-' : ''}
-                                {tx.amount.toLocaleString()} {tx.asset.split(' ')[0]}
-                              </p>
-                              <p className="text-xs text-emerald-800 mono">{tx.hash}</p>
-                            </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
@@ -1817,8 +1927,8 @@
                       {[
                         { icon: 'Send', label: 'Send', desc: 'Transfer', color: '#3B82F6', action: () => setShowTransferModal(true) },
                         { icon: 'QrCode', label: 'Receive', desc: 'Get paid', color: '#10B981', action: () => setShowReceiveModal(true) },
-                        { icon: 'Users', label: 'P2P', desc: 'Trade', color: '#06B6D4', action: () => {} },
-                        { icon: 'Briefcase', label: 'OTC', desc: 'Large trades', color: '#F59E0B', action: () => {} },
+                        { icon: 'Users', label: 'P2P', desc: 'Trade', color: '#06B6D4', action: () => setShowP2PModal(true) },
+                        { icon: 'Briefcase', label: 'OTC', desc: 'Large trades', color: '#F59E0B', action: () => setShowOTCModal(true) },
                       ].map((action, i) => (
                         <button
                           key={action.label}
@@ -2078,6 +2188,84 @@
                       </div>
                     </div>
                   </div>
+
+                  {/* PQC Cryptography Section */}
+                  <div className="tm-card p-6 animate-fade-up delay-3">
+                    <div className="flex items-center justify-between mb-6">
+                      <div>
+                        <h3 className="font-display text-xl font-semibold text-emerald-200 flex items-center gap-2">
+                          <Icon name="ShieldCheck" className="w-5 h-5 text-cyan-400" />
+                          Quantum-Resistant Cryptography
+                        </h3>
+                        <p className="text-emerald-700 text-sm mt-1">Your wallet uses post-quantum secure algorithms</p>
+                      </div>
+                      <span className="tm-badge" style={{ background: 'rgba(6, 182, 212, 0.15)', color: '#22D3EE', border: '1px solid rgba(6, 182, 212, 0.2)' }}>
+                        <Icon name="Lock" className="w-3 h-3" />
+                        PQC Active
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-4 mb-6">
+                      {/* Signature Algorithm */}
+                      <div className="p-5 rounded-2xl" style={{ background: 'var(--tm-surface-1)', border: '1px solid rgba(6, 182, 212, 0.1)' }}>
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="tm-icon-box icon-sm" style={{ background: 'rgba(6, 182, 212, 0.15)' }}>
+                            <Icon name="PenTool" className="w-4 h-4 text-cyan-400" />
+                          </div>
+                          <span className="text-emerald-600 text-xs uppercase tracking-wider">Signatures</span>
+                        </div>
+                        <p className="font-display font-bold text-emerald-200 text-lg mb-1">CRYSTALS-Dilithium</p>
+                        <p className="text-emerald-700 text-xs">Level 3 (NIST PQC Standard)</p>
+                        <div className="flex items-center gap-2 mt-3">
+                          <div className="w-2 h-2 rounded-full" style={{ background: '#06B6D4', boxShadow: '0 0 6px #06B6D4' }} />
+                          <span className="text-cyan-400 text-xs">Hybrid Mode Active</span>
+                        </div>
+                      </div>
+
+                      {/* Key Encapsulation */}
+                      <div className="p-5 rounded-2xl" style={{ background: 'var(--tm-surface-1)', border: '1px solid rgba(6, 182, 212, 0.1)' }}>
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="tm-icon-box icon-sm" style={{ background: 'rgba(6, 182, 212, 0.15)' }}>
+                            <Icon name="KeyRound" className="w-4 h-4 text-cyan-400" />
+                          </div>
+                          <span className="text-emerald-600 text-xs uppercase tracking-wider">Key Exchange</span>
+                        </div>
+                        <p className="font-display font-bold text-emerald-200 text-lg mb-1">CRYSTALS-Kyber</p>
+                        <p className="text-emerald-700 text-xs">768 (ML-KEM Standard)</p>
+                        <div className="flex items-center gap-2 mt-3">
+                          <div className="w-2 h-2 rounded-full" style={{ background: '#06B6D4', boxShadow: '0 0 6px #06B6D4' }} />
+                          <span className="text-cyan-400 text-xs">TLS 1.3 + PQC</span>
+                        </div>
+                      </div>
+
+                      {/* Hash Algorithm */}
+                      <div className="p-5 rounded-2xl" style={{ background: 'var(--tm-surface-1)', border: '1px solid rgba(6, 182, 212, 0.1)' }}>
+                        <div className="flex items-center gap-3 mb-3">
+                          <div className="tm-icon-box icon-sm" style={{ background: 'rgba(6, 182, 212, 0.15)' }}>
+                            <Icon name="Hash" className="w-4 h-4 text-cyan-400" />
+                          </div>
+                          <span className="text-emerald-600 text-xs uppercase tracking-wider">Hashing</span>
+                        </div>
+                        <p className="font-display font-bold text-emerald-200 text-lg mb-1">SHA-3 / SHAKE</p>
+                        <p className="text-emerald-700 text-xs">256-bit Security Level</p>
+                        <div className="flex items-center gap-2 mt-3">
+                          <div className="w-2 h-2 rounded-full" style={{ background: '#10B981', boxShadow: '0 0 6px #10B981' }} />
+                          <span className="text-emerald-400 text-xs">Quantum Resistant</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Security Status Bar */}
+                    <div className="p-4 rounded-xl flex items-center justify-between" style={{ background: 'linear-gradient(90deg, rgba(6, 182, 212, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%)', border: '1px solid rgba(6, 182, 212, 0.15)' }}>
+                      <div className="flex items-center gap-3">
+                        <Icon name="Info" className="w-4 h-4 text-cyan-400" />
+                        <span className="text-emerald-300 text-sm">All transactions use hybrid signatures (Classical + PQC) for maximum security</span>
+                      </div>
+                      <button className="tm-btn-ghost text-xs" style={{ color: '#22D3EE' }}>
+                        Learn More <Icon name="ExternalLink" className="w-3 h-3" />
+                      </button>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -2134,6 +2322,148 @@
                               Testnet
                             </button>
                           </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* PQC Security Settings */}
+                  <div className="tm-card p-6 animate-fade-up delay-2" style={{ border: '1px solid rgba(6, 182, 212, 0.2)' }}>
+                    <h3 className="font-semibold text-emerald-200 mb-4 flex items-center gap-2">
+                      <div className="relative">
+                        <Icon name="ShieldCheck" className="w-5 h-5 text-cyan-400" />
+                        <div className="absolute -top-1 -right-1 w-2 h-2 rounded-full" style={{ background: '#06B6D4', boxShadow: '0 0 6px #06B6D4' }} />
+                      </div>
+                      Post-Quantum Security
+                      <span className="ml-2 px-2 py-0.5 rounded text-[10px] font-medium" style={{ background: 'rgba(6, 182, 212, 0.2)', color: '#06B6D4' }}>NIST Approved</span>
+                    </h3>
+                    <div className="grid grid-cols-3 gap-4">
+                      {/* Signature Mode */}
+                      <div className="p-4 rounded-xl" style={{ background: 'var(--tm-surface-1)' }}>
+                        <div className="flex items-center gap-3 mb-3">
+                          <Icon name="PenTool" className="w-5 h-5 text-cyan-400" />
+                          <div>
+                            <p className="font-medium text-emerald-200 text-sm">Signature Mode</p>
+                            <p className="text-xs text-emerald-700">Transaction signing algorithm</p>
+                          </div>
+                        </div>
+                        <div className="space-y-2">
+                          {[
+                            { id: 'hybrid', label: 'Hybrid', desc: 'ECDSA + Dilithium (Recommended)', color: '#06B6D4' },
+                            { id: 'pqc', label: 'PQC Only', desc: 'Dilithium-3 only', color: '#8B5CF6' },
+                            { id: 'classical', label: 'Classical', desc: 'ECDSA only (Legacy)', color: '#F59E0B' },
+                          ].map((mode) => (
+                            <button
+                              key={mode.id}
+                              onClick={() => setPqcSignatureMode(mode.id)}
+                              className="w-full p-3 rounded-lg text-left transition-all"
+                              style={{
+                                background: pqcSignatureMode === mode.id ? `${mode.color}15` : 'var(--tm-surface-2)',
+                                border: pqcSignatureMode === mode.id ? `1px solid ${mode.color}40` : '1px solid transparent',
+                              }}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div>
+                                  <p className="text-sm font-medium" style={{ color: pqcSignatureMode === mode.id ? mode.color : 'rgb(167, 243, 208)' }}>
+                                    {mode.label}
+                                  </p>
+                                  <p className="text-xs text-emerald-700">{mode.desc}</p>
+                                </div>
+                                {pqcSignatureMode === mode.id && (
+                                  <Icon name="Check" className="w-4 h-4" style={{ color: mode.color }} />
+                                )}
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Migration Status */}
+                      <div className="p-4 rounded-xl" style={{ background: 'var(--tm-surface-1)' }}>
+                        <div className="flex items-center gap-3 mb-3">
+                          <Icon name="RefreshCw" className="w-5 h-5 text-cyan-400" />
+                          <div>
+                            <p className="font-medium text-emerald-200 text-sm">PQC Migration</p>
+                            <p className="text-xs text-emerald-700">Auto-upgrade wallet keys</p>
+                          </div>
+                        </div>
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between p-3 rounded-lg" style={{ background: 'var(--tm-surface-2)' }}>
+                            <div>
+                              <p className="text-sm text-emerald-200">Auto-Migration</p>
+                              <p className="text-xs text-emerald-700">Upgrade keys when available</p>
+                            </div>
+                            <button
+                              onClick={() => setPqcMigrationEnabled(!pqcMigrationEnabled)}
+                              className="toggle-switch"
+                              style={{ background: pqcMigrationEnabled ? '#06B6D4' : 'var(--tm-surface-3)' }}
+                            >
+                              <div
+                                className="toggle-knob"
+                                style={{ transform: pqcMigrationEnabled ? 'translateX(20px)' : 'translateX(0)' }}
+                              />
+                            </button>
+                          </div>
+                          <div className="p-3 rounded-lg" style={{ background: 'rgba(6, 182, 212, 0.1)' }}>
+                            <div className="flex items-center gap-2 mb-2">
+                              <Icon name="CheckCircle" className="w-4 h-4 text-cyan-400" />
+                              <span className="text-xs text-cyan-400 font-medium">Migration Status</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <div className="flex-1 h-2 rounded-full" style={{ background: 'var(--tm-surface-3)' }}>
+                                <div className="h-full rounded-full" style={{ width: '100%', background: 'linear-gradient(90deg, #06B6D4, #8B5CF6)' }} />
+                              </div>
+                              <span className="text-xs text-cyan-400">100%</span>
+                            </div>
+                            <p className="text-xs text-emerald-700 mt-1">All keys upgraded to hybrid</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Backup Encryption */}
+                      <div className="p-4 rounded-xl" style={{ background: 'var(--tm-surface-1)' }}>
+                        <div className="flex items-center gap-3 mb-3">
+                          <Icon name="HardDrive" className="w-5 h-5 text-cyan-400" />
+                          <div>
+                            <p className="font-medium text-emerald-200 text-sm">Backup Encryption</p>
+                            <p className="text-xs text-emerald-700">Quantum-safe backups</p>
+                          </div>
+                        </div>
+                        <div className="space-y-3">
+                          <div className="flex items-center justify-between p-3 rounded-lg" style={{ background: 'var(--tm-surface-2)' }}>
+                            <div>
+                              <p className="text-sm text-emerald-200">PQC Encryption</p>
+                              <p className="text-xs text-emerald-700">Use CRYSTALS-Kyber</p>
+                            </div>
+                            <button
+                              onClick={() => setPqcBackupEncryption(!pqcBackupEncryption)}
+                              className="toggle-switch"
+                              style={{ background: pqcBackupEncryption ? '#06B6D4' : 'var(--tm-surface-3)' }}
+                            >
+                              <div
+                                className="toggle-knob"
+                                style={{ transform: pqcBackupEncryption ? 'translateX(20px)' : 'translateX(0)' }}
+                              />
+                            </button>
+                          </div>
+                          <div className="p-3 rounded-lg" style={{ background: 'var(--tm-surface-2)' }}>
+                            <p className="text-xs text-emerald-600 mb-2">Active Algorithm</p>
+                            <div className="flex items-center gap-2">
+                              <Icon name="Lock" className="w-4 h-4 text-cyan-400" />
+                              <span className="text-sm text-emerald-200 font-medium">
+                                {pqcBackupEncryption ? 'CRYSTALS-Kyber-1024' : 'AES-256-GCM'}
+                              </span>
+                            </div>
+                            <p className="text-xs text-emerald-700 mt-1">
+                              {pqcBackupEncryption ? 'Quantum-resistant key encapsulation' : 'Classical symmetric encryption'}
+                            </p>
+                          </div>
+                          <button className="w-full p-3 rounded-lg text-sm font-medium text-cyan-400 transition-all hover:bg-cyan-400/10" style={{ background: 'var(--tm-surface-2)', border: '1px solid rgba(6, 182, 212, 0.2)' }}>
+                            <div className="flex items-center justify-center gap-2">
+                              <Icon name="Download" className="w-4 h-4" />
+                              Export PQC Backup
+                            </div>
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -2270,6 +2600,168 @@
                       </button>
                     </div>
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* P2P Trading Modal */}
+            {showP2PModal && (
+              <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+                <div className="tm-card w-full max-w-2xl p-8 m-4 animate-scale-in">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="font-display text-2xl font-bold text-emerald-200 flex items-center gap-2">
+                      <Icon name="Users" className="w-6 h-6 text-cyan-400" /> P2P Trading
+                    </h3>
+                    <button onClick={() => setShowP2PModal(false)} className="text-emerald-600 hover:text-emerald-400">
+                      <Icon name="X" className="w-6 h-6" />
+                    </button>
+                  </div>
+
+                  {/* Buy/Sell Tabs */}
+                  <div className="flex gap-2 mb-6">
+                    <button
+                      onClick={() => setP2pTab('buy')}
+                      className="flex-1 py-3 rounded-xl font-medium transition-all"
+                      style={{
+                        background: p2pTab === 'buy' ? 'rgba(16, 185, 129, 0.2)' : 'var(--tm-surface-1)',
+                        color: p2pTab === 'buy' ? '#34D399' : '#047857',
+                        border: p2pTab === 'buy' ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid transparent'
+                      }}
+                    >
+                      <Icon name="ArrowDownLeft" className="w-4 h-4 inline mr-2" />
+                      Buy
+                    </button>
+                    <button
+                      onClick={() => setP2pTab('sell')}
+                      className="flex-1 py-3 rounded-xl font-medium transition-all"
+                      style={{
+                        background: p2pTab === 'sell' ? 'rgba(59, 130, 246, 0.2)' : 'var(--tm-surface-1)',
+                        color: p2pTab === 'sell' ? '#60A5FA' : '#047857',
+                        border: p2pTab === 'sell' ? '1px solid rgba(59, 130, 246, 0.3)' : '1px solid transparent'
+                      }}
+                    >
+                      <Icon name="ArrowUpRight" className="w-4 h-4 inline mr-2" />
+                      Sell
+                    </button>
+                  </div>
+
+                  {/* Merchant List */}
+                  <div className="space-y-3 max-h-80 overflow-y-auto">
+                    {[
+                      { name: 'CryptoWhale', rating: 4.9, trades: 1250, price: p2pTab === 'buy' ? 1.001 : 0.999, available: 50000, methods: ['Bank Transfer', 'PayPal'] },
+                      { name: 'DiamondHands', rating: 4.8, trades: 890, price: p2pTab === 'buy' ? 1.002 : 0.998, available: 25000, methods: ['Bank Transfer'] },
+                      { name: 'MoonTrader', rating: 4.7, trades: 567, price: p2pTab === 'buy' ? 1.003 : 0.997, available: 100000, methods: ['Bank Transfer', 'Wise'] },
+                      { name: 'SatoshiFan', rating: 4.9, trades: 2100, price: p2pTab === 'buy' ? 1.001 : 0.999, available: 75000, methods: ['Bank Transfer', 'Revolut'] },
+                    ].map((merchant) => (
+                      <div key={merchant.name} className="p-4 rounded-xl flex items-center justify-between" style={{ background: 'var(--tm-surface-1)' }}>
+                        <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 rounded-xl flex items-center justify-center" style={{ background: 'var(--gradient-emerald)' }}>
+                            <Icon name="User" className="w-6 h-6 text-black" />
+                          </div>
+                          <div>
+                            <div className="flex items-center gap-2">
+                              <span className="font-semibold text-emerald-200">{merchant.name}</span>
+                              <span className="flex items-center gap-1 text-yellow-400 text-sm">
+                                <Icon name="Star" className="w-3 h-3 fill-current" /> {merchant.rating}
+                              </span>
+                              <span className="text-emerald-700 text-xs">({merchant.trades} trades)</span>
+                            </div>
+                            <div className="flex items-center gap-2 mt-1">
+                              {merchant.methods.map((m) => (
+                                <span key={m} className="px-2 py-0.5 rounded text-xs" style={{ background: 'var(--tm-surface-2)', color: '#047857' }}>{m}</span>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-lg font-bold text-emerald-200">${merchant.price.toFixed(3)}</p>
+                          <p className="text-xs text-emerald-700">Available: ${merchant.available.toLocaleString()}</p>
+                          <button className="mt-2 px-4 py-1.5 rounded-lg text-sm font-medium" style={{ background: p2pTab === 'buy' ? 'rgba(16, 185, 129, 0.2)' : 'rgba(59, 130, 246, 0.2)', color: p2pTab === 'buy' ? '#34D399' : '#60A5FA' }}>
+                            {p2pTab === 'buy' ? 'Buy' : 'Sell'} SUSD
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-6 p-4 rounded-xl flex items-center gap-3" style={{ background: 'rgba(6, 182, 212, 0.1)', border: '1px solid rgba(6, 182, 212, 0.2)' }}>
+                    <Icon name="ShieldCheck" className="w-5 h-5 text-cyan-400" />
+                    <p className="text-sm text-cyan-400">All trades are protected by escrow and PQC-secured signatures</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* OTC Trading Modal */}
+            {showOTCModal && (
+              <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+                <div className="tm-card w-full max-w-lg p-8 m-4 animate-scale-in">
+                  <div className="flex items-center justify-between mb-6">
+                    <h3 className="font-display text-2xl font-bold text-emerald-200 flex items-center gap-2">
+                      <Icon name="Briefcase" className="w-6 h-6 text-yellow-400" /> OTC Desk
+                    </h3>
+                    <button onClick={() => setShowOTCModal(false)} className="text-emerald-600 hover:text-emerald-400">
+                      <Icon name="X" className="w-6 h-6" />
+                    </button>
+                  </div>
+
+                  <div className="p-4 rounded-xl mb-6" style={{ background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon name="TrendingUp" className="w-5 h-5 text-yellow-400" />
+                      <span className="font-semibold text-yellow-400">Large Volume Trading</span>
+                    </div>
+                    <p className="text-sm text-emerald-600">For trades over $100,000 with competitive rates and dedicated support</p>
+                  </div>
+
+                  <div className="space-y-4 mb-6">
+                    <div>
+                      <label className="text-sm text-emerald-600 mb-2 block">Trade Type</label>
+                      <div className="flex gap-2">
+                        <button className="flex-1 py-3 rounded-xl font-medium" style={{ background: 'rgba(16, 185, 129, 0.2)', color: '#34D399', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+                          Buy
+                        </button>
+                        <button className="flex-1 py-3 rounded-xl font-medium" style={{ background: 'var(--tm-surface-1)', color: '#047857' }}>
+                          Sell
+                        </button>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-sm text-emerald-600 mb-2 block">Asset</label>
+                      <select className="tm-input">
+                        <option>SUSD - StableUSD</option>
+                        <option>SET - Stable Euro Token</option>
+                        <option>SYT - Stable Yen Token</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="text-sm text-emerald-600 mb-2 block">Amount (min $100,000)</label>
+                      <input type="text" placeholder="Enter amount" className="tm-input" />
+                    </div>
+                  </div>
+
+                  <div className="p-4 rounded-xl mb-6" style={{ background: 'var(--tm-surface-1)' }}>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-emerald-600">Current OTC Rate</span>
+                      <span className="text-emerald-200 font-bold">$0.9995 / SUSD</span>
+                    </div>
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="text-emerald-600">Settlement Time</span>
+                      <span className="text-emerald-200">T+1 Business Day</span>
+                    </div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-emerald-600">Min Trade Size</span>
+                      <span className="text-emerald-200">$100,000</span>
+                    </div>
+                  </div>
+
+                  <button className="tm-btn-primary w-full">
+                    <Icon name="MessageSquare" className="w-4 h-4 mr-2" />
+                    Contact OTC Desk
+                  </button>
+
+                  <p className="text-center text-emerald-700 text-xs mt-4">
+                    A dedicated relationship manager will contact you within 1 hour
+                  </p>
                 </div>
               </div>
             )}
