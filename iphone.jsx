@@ -976,7 +976,7 @@ export default function iPhoneTrustMachinesEdition() {
                 </div>
               </div>
 
-              <p className="text-center mt-6" style={{ color: '#064E3B', fontSize: 11 }}>StablePay v1.0.0 • X. & L. Engineering Pty Ltd</p>
+              <p className="text-center mt-6" style={{ color: '#064E3B', fontSize: 11 }}>SparkToken v1.0.0 • X. & L. Engineering Pty Ltd</p>
             </div>
           )}
         </div>

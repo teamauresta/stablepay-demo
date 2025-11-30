@@ -662,7 +662,7 @@ export default function TrustMachinesInspiredDemo() {
               <Gem className="w-6 h-6 text-black" />
             </div>
             <div>
-              <h1 className="font-display font-bold text-xl text-gradient">StablePay</h1>
+              <h1 className="font-display font-bold text-xl text-gradient">SparkToken</h1>
               <p className="text-[11px] text-emerald-700 tracking-wider uppercase">Enterprise Platform</p>
             </div>
           </div>
@@ -1441,7 +1441,7 @@ export default function TrustMachinesInspiredDemo() {
               </div>
 
               <p className="text-center text-emerald-800 text-xs">
-                StablePay v1.0.0 • X. & L. Engineering Pty Ltd • Enterprise Edition
+                SparkToken v1.0.0 • X. & L. Engineering Pty Ltd • Enterprise Edition
               </p>
             </div>
           )}
